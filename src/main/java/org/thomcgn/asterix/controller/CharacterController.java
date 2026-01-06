@@ -1,6 +1,7 @@
 package org.thomcgn.asterix.controller;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.thomcgn.asterix.dto.CharacterRequest;
@@ -13,7 +14,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/asterix/characters")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CharacterController {
 
     private final CharacterService service;
