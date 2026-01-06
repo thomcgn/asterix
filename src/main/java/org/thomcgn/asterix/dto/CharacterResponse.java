@@ -1,4 +1,9 @@
 package org.thomcgn.asterix.dto;
 
-public class CharacterResponse {
+public record CharacterResponse(
+        String id,
+        String name,
+        int age,
+        String profession
+) {
 }

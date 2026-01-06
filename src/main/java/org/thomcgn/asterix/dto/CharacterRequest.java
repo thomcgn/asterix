@@ -1,4 +1,4 @@
-package org.thomcgn.asterix;
+package org.thomcgn.asterix.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
