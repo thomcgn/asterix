@@ -1,5 +1,6 @@
 package org.thomcgn.asterix.service;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.thomcgn.asterix.dto.CharacterRequest;
 import org.thomcgn.asterix.dto.CharacterResponse;
@@ -11,14 +12,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class CharacterService {
     private final CharacterRepo repo;
     private final CharacterMapper mapper;
-
-    public CharacterService(CharacterRepo repo, CharacterMapper mapper){
-        this.repo = repo;
-        this.mapper = mapper;
-    }
 
     public List<CharacterResponse> getAllCharacters(){
         return repo.findAll()
