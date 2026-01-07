@@ -10,7 +10,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @Document(collection = "asterix_chars")
 @RequiredArgsConstructor
-@NoArgsConstructor
 public class AsterixCharacter {
     @Id
     private String id;

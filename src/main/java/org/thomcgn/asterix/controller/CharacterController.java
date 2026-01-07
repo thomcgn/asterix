@@ -11,13 +11,17 @@ import org.thomcgn.asterix.service.CharacterService;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/asterix/characters")
-@RequiredArgsConstructor
+
 public class CharacterController {
 
     private final CharacterService service;
+
+    public CharacterController(CharacterService service) {
+        this.service = service;
+    }
 
 
     @GetMapping
