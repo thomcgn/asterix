@@ -16,6 +16,7 @@ import java.util.Optional;
 public class CharacterService {
     private final CharacterRepo repo;
     private final CharacterMapper mapper;
+    private final IdService idService;
 
     public List<CharacterResponse> getAllCharacters(){
         return repo.findAll()
@@ -34,6 +35,7 @@ public class CharacterService {
 
     public CharacterResponse createCharacter(CharacterRequest dto){
         AsterixCharacter character = new AsterixCharacter();
+        character.setId(idService.setUuid());
         character.setName(dto.name());
         character.setAge(dto.age());
         character.setProfession(dto.profession());

@@ -27,6 +27,8 @@ class CharacterServiceTest {
     private CharacterRepo characterRepo;
     @Mock
     private CharacterMapper mapper;
+    @Mock
+    private IdService idService;
 
     @InjectMocks
     private CharacterService service;
@@ -68,6 +70,43 @@ class CharacterServiceTest {
         verify(characterRepo).findById("1");
         verify(mapper).toResponse(character);
     }
+    @Test
+    void createCharacter() {
+        // GIVEN
+        CharacterRequest request = new CharacterRequest("Name", 100, "Smith");
+        AsterixCharacter characterToSave = new AsterixCharacter();
+        characterToSave.setId("mocked-uuid");
+        characterToSave.setName("Name");
+        characterToSave.setAge(100);
+        characterToSave.setProfession("Smith");
+
+        AsterixCharacter savedCharacter = new AsterixCharacter();
+        savedCharacter.setId("mocked-uuid");
+        savedCharacter.setName("Name");
+        savedCharacter.setAge(100);
+        savedCharacter.setProfession("Smith");
+
+        CharacterResponse responseDto = new CharacterResponse("mocked-uuid", "Name", 100, "Smith");
+
+        Mockito.when(idService.setUuid()).thenReturn("mocked-uuid");
+        Mockito.when(characterRepo.save(any(AsterixCharacter.class))).thenReturn(savedCharacter);
+        Mockito.when(mapper.toResponse(savedCharacter)).thenReturn(responseDto);
+
+        // WHEN
+        CharacterResponse response = service.createCharacter(request);
+
+        // THEN
+        assertNotNull(response);
+        assertEquals("mocked-uuid", response.id());
+        assertEquals("Name", response.name());
+        assertEquals(100, response.age());
+        assertEquals("Smith", response.profession());
+
+        verify(idService).setUuid();
+        verify(characterRepo).save(any(AsterixCharacter.class));
+        verify(mapper).toResponse(savedCharacter);
+    }
+
 
     @Test
     void updateCharacter() {
