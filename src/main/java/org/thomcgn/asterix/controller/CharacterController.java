@@ -48,14 +48,14 @@ public class CharacterController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AsterixCharacter> updateCharacter(@PathVariable String id, @RequestBody CharacterRequest request) {
+    public ResponseEntity<CharacterResponse> updateCharacter(@PathVariable String id, @RequestBody CharacterRequest request) {
         try {
-            AsterixCharacter updated = service.updateCharacter(id, request);
+            CharacterResponse updated = service.updateCharacter(id, request);
             return ResponseEntity.ok(updated);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
-    } //TODO: DTO - verhindern das unzulässiges manipuliert wird
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<AsterixCharacter> deleteCharacter(@PathVariable String id) {

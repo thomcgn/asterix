@@ -42,15 +42,17 @@ public class CharacterService {
         return mapper.toResponse(savedCharacter);
     }
 
-    public AsterixCharacter updateCharacter(String id, CharacterRequest character){
-        return repo.findById(id)
-                .map(existing ->{
-                    boolean nameChanged = !existing.getName().equals(character.name());
+    public CharacterResponse updateCharacter(String id, CharacterRequest character){
+        AsterixCharacter saved = repo.findById(id)
+                .map(existing -> {
                     existing.setName(character.name());
                     existing.setAge(character.age());
                     existing.setProfession(character.profession());
                     return repo.save(existing);
-                }).orElseThrow(()-> new RuntimeException("Charakter nicht gefunden!"));
+                })
+                .orElseThrow(() -> new RuntimeException("Charakter nicht gefunden!"));
+
+        return mapper.toResponse(saved);
     }
 
     public boolean deleteCharacter(String id){
