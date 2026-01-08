@@ -18,7 +18,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class CharacterServiceTest {
@@ -67,8 +67,9 @@ class CharacterServiceTest {
         assertTrue(response.isPresent());
         assertEquals("1", response.get().id());
 
-        verify(characterRepo).findById("1");
+        verify(characterRepo, times(1)).findById("1");
         verify(mapper).toResponse(character);
+        verifyNoInteractions(mapper, idService, characterRepo);
     }
     @Test
     void createCharacter() {
