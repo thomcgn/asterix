@@ -42,13 +42,13 @@ public class CharacterService {
         return mapper.toResponse(savedCharacter);
     }
 
-    public AsterixCharacter updateCharacter(String id, AsterixCharacter character){
+    public AsterixCharacter updateCharacter(String id, CharacterRequest character){
         return repo.findById(id)
                 .map(existing ->{
-                    boolean nameChanged = !existing.getName().equals(character.getName());
-                    existing.setName(character.getName());
-                    existing.setAge(character.getAge());
-                    existing.setProfession(character.getProfession());
+                    boolean nameChanged = !existing.getName().equals(character.name());
+                    existing.setName(character.name());
+                    existing.setAge(character.age());
+                    existing.setProfession(character.profession());
                     return repo.save(existing);
                 }).orElseThrow(()-> new RuntimeException("Charakter nicht gefunden!"));
     }
