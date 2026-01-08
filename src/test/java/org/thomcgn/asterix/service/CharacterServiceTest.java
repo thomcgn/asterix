@@ -68,8 +68,8 @@ class CharacterServiceTest {
         assertEquals("1", response.get().id());
 
         verify(characterRepo, times(1)).findById("1");
-        verify(mapper).toResponse(character);
-        verifyNoInteractions(mapper, idService, characterRepo);
+        verify(mapper, times(1)).toResponse(character);
+        verifyNoMoreInteractions(characterRepo, mapper, idService);
     }
     @Test
     void createCharacter() {
